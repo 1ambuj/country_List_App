@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { IoIosSearch } from "react-icons/io";
 import { MdKeyboardArrowUp, MdKeyboardArrowDown } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 
 export default function SearchFilter({ handleChange, setData }) {
   const [open, setOpen] = useState(false);
   const [region, setRegion] = useState(null);
-
+  const navigate = useNavigate()
   function toggle() {
     setOpen(prev => !prev);
   }
@@ -24,6 +25,9 @@ export default function SearchFilter({ handleChange, setData }) {
     setRegion(selectedRegion);
     setOpen(false);
 
+  }
+  function Clear(){
+    navigate("/")
   }
 
   return (
@@ -63,6 +67,12 @@ export default function SearchFilter({ handleChange, setData }) {
               </li>
               <li className="py-2 px-4 hover:bg-gray-200">
                 <button onClick={() => handleRegionChange("americas")}>Americas</button>
+              </li>
+              <li className="py-2 px-4 hover:bg-gray-200">
+                <button onClick={() => handleRegionChange("americas")}>Americas</button>
+              </li>
+              <li>
+                 <button onClick={Clear}  className="py-2 px-4 hover:bg-gray-200 bg-blue-500 w-full rounded">Clear Filter</button>
               </li>
             </ul>
           </div>
