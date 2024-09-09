@@ -1,11 +1,13 @@
-import  { useEffect, useState } from "react"
+import  { useContext, useEffect, useState } from "react"
 import {Link} from "react-router-dom"
 import { nanoid } from 'nanoid';
 import SearchFilter from "./SearchFilter";
+import { ThemeContext } from "../../App";
 export default function CountryCard(){
     const [data, setData] = useState([])
     const [loading, setLoading] = useState(false)
     const [inputData, setInputData] = useState('')
+    const {isDark} = useContext(ThemeContext)
     useEffect(()=>{
         setLoading(true)
        fetch("https://restcountries.com/v3.1/all")
@@ -21,16 +23,16 @@ export default function CountryCard(){
   })
  
   const renderData = (inputData?inputFilterData:data).map((data)=>{
-   
+
     return (
                <div className="w-fit flex flex-col justifu-center items-center  m-2 shadow " key={nanoid()}>
                  <Link to={`/countries/${data.ccn3}`}>
                     <img src={data.flags.png} alt="country flags" className="w-[200px] h-[130px] rounded-t-sm"/>
-                    <div className="bg-white p-5 rounded-b-[3px] w-[200px] ">
+                    <div className={`bg-white p-5 rounded-b-[3px] w-[200px]  ${isDark ? "bg-gray-800 text-white":""}`}>
                        <h3 className="font-bold mb-2">{data.name.common}</h3> 
-                       <p className="text-xs text-gray-400"><span className="font-medium text-black   text-sm">Population :</span> {data.population}</p>
-                       <p className="text-xs text-gray-400"><span className="font-medium text-black   text-sm">Region : </span> {data.region}</p>
-                       <p className="text-xs text-gray-400 pb-4"><span className="font-medium text-black  text-sm">Capital : </span> {data.capital}</p>
+                       <p className="text-xs text-gray-400"><span className={`font-medium  text-sm ${isDark? "text-white": "text-[#000]"}`}>Population :</span> {data.population}</p>
+                       <p className="text-xs text-gray-400"><span className={`font-medium  text-sm ${isDark? "text-white": "text-[#000]"}`}>Region : </span> {data.region}</p>
+                       <p className="text-xs text-gray-400 pb-4"><span className={`font-medium  text-sm ${isDark? "text-white": "text-[#000]"}`}>Capital : </span> {data.capital}</p>
                     </div>
                   </Link>
              </div> 
@@ -39,10 +41,11 @@ export default function CountryCard(){
  if(loading){
     <h2>Loading...</h2>
  }
+
   return (
     <>
      <SearchFilter handleChange={handleChange}  setData={setData}/>
-     <div className="flex flex-wrap justify-center gap-3 items-center px-4 overflow-hidden w-full ">
+     <div className={`flex flex-wrap justify-between gap-3 items-center px-4 overflow-hidden w-full ${isDark? "bg-gray-900" : ""} `}>
         {renderData}
      </div>
     </>
