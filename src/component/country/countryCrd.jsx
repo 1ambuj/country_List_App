@@ -45,7 +45,7 @@ export default function CountryCard(){
   return (
     <>
      <SearchFilter handleChange={handleChange}  setData={setData}/>
-     <div className={`flex flex-wrap justify-between gap-3 items-center px-4 overflow-hidden w-full ${isDark? "bg-gray-900" : ""} `}>
+     <div className={`flex flex-wrap justify-between  items-center px-5 overflow-hidden w-full ${isDark? "bg-gray-900" : ""} `}>
         {renderData}
      </div>
     </>

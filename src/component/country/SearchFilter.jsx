@@ -36,9 +36,9 @@ export default function SearchFilter({ handleChange, setData }) {
 
   return (
     <div className={`flex items-start pt-5 justify-between ${isDark ? "bg-gray-900" : ""}`}>
-      {/* Search Input */}
-      <div className="flex justify-between px-8 relative">
-        <IoIosSearch className={`absolute bottom-10 mx-2 ${isDark ? "text-white" : "text-black"}`} />
+    
+      <div className="flex justify-between px-8  relative">
+        <IoIosSearch className={`absolute bottom-10 mx-2  ${isDark ? "text-white" : "text-black"}`} />
         <input
           type="text"
           placeholder="Search for a country"
@@ -47,7 +47,7 @@ export default function SearchFilter({ handleChange, setData }) {
         />
       </div>
 
-      {/* Filter Button */}
+    
       <div className="relative mr-8">
         <button
           className={`py-3 px-5 rounded-md shadow flex items-center w-[200px] mb-1 ${isDark ? "bg-gray-800 text-white" : ""}`}
@@ -57,7 +57,7 @@ export default function SearchFilter({ handleChange, setData }) {
           {open ? <MdKeyboardArrowUp className="ml-2" /> : <MdKeyboardArrowDown className="ml-2" />}
         </button>
         
-        {/* Dropdown Menu */}
+       
         {open && (
           <div className={`absolute top-12 w-[200px] shadow rounded-md ${isDark ? "bg-gray-700 text-white" : "bg-white text-black"}`}>
             <ul className="p-2">

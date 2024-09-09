@@ -5,7 +5,7 @@ import './App.css'
 import CountryCard from './component/country/countryCrd'
 import Layout from './component/common/Layout'
 import CountryDetails from './component/country/CountryDetails'
-import { createContext, useState } from 'react'
+import { createContext, useEffect, useState } from 'react'
 
 const ThemeContext = createContext();
 function App() {
@@ -13,6 +13,15 @@ function App() {
  function toggle(){
   setIsDrak(!isDark)
  }
+ useEffect(() => {
+
+  document.body.style.backgroundColor = isDark ? "#111827" : "";  
+
+ 
+  return () => {
+    document.body.style.backgroundColor = ""; 
+  };
+}, [isDark]);
   return (
    <BrowserRouter>
    <ThemeContext.Provider value={{isDark , toggle}}>
@@ -21,6 +30,7 @@ function App() {
           <Route path="/" element={<Navigate to="/countries" replace />} />
           <Route path="/countries" element={<CountryCard />} />
           <Route path="/countries/:id" element={<CountryDetails />} />
+        
         </Route>
     </Routes>
     </ThemeContext.Provider>
